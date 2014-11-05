@@ -92,20 +92,12 @@
 
 ........
 log :
-testLinearizability:
 TIME_Lineatizability = 109207
-testFunctionalTest:
-TIME_EmptyBank = 0
-TIME_Transfer = 0
-TIME_Deposit = 0
-TIME_Withdraw = 0
-TIME_TotalAmount = 0
-MTSStressTest:
 Total average 10639417 ops per phase
 TIME_MTStressTest = 10120
 
 //////////
-add first rule.
-Total average 4157713 ops per phase
-TIME_MTStressTest = 10082
+TIME_Lineatizability = 93620
+Total average 6004376 ops per phase
+TIME_MTStressTest = 10078
 
