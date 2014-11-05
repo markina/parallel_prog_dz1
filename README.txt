@@ -104,3 +104,8 @@ MTSStressTest:
 Total average 10639417 ops per phase
 TIME_MTStressTest = 10120
 
+//////////
+add first rule.
+Total average 4157713 ops per phase
+TIME_MTStressTest = 10082
+

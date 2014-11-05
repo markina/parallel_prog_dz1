@@ -55,14 +55,14 @@ public class BankImpl implements Bank {
      */
     @Override
     public long getTotalAmount() {
-        for (int i = 0; i < accounts.length; i++) {
+        for(int i = 0; i < accounts.length; i++) {
             accounts[i].setLock();
         }
         long sum = 0;
         for (Account account : accounts) {
             sum += account.amount;
         }
-        for (int i = 0; i < accounts.length; i++) {
+        for(int i = accounts.length - 1; i >= 0; i--) {
             accounts[i].setUnlock();
         }
         return sum;
@@ -109,9 +109,14 @@ public class BankImpl implements Bank {
      * <p>:TODO: This method has to be made thread-safe.
      */
     @Override
-    public void transfer(int fromIndex, int toIndex, long amount) {
-        accounts[fromIndex].setLock();
-        accounts[toIndex].setLock();
+    public synchronized void transfer(int fromIndex, int toIndex, long amount) {
+        if(fromIndex < toIndex) {
+            accounts[fromIndex].setLock();
+            accounts[toIndex].setLock();
+        } else {
+            accounts[toIndex].setLock();
+            accounts[fromIndex].setLock();
+        }
         if (amount <= 0)
             throw new IllegalArgumentException("Invalid amount: " + amount);
         if (fromIndex == toIndex)
@@ -124,8 +129,13 @@ public class BankImpl implements Bank {
             throw new IllegalStateException("Overflow");
         from.amount -= amount;
         to.amount += amount;
-        accounts[toIndex].setUnlock();
-        accounts[fromIndex].setUnlock();
+        if(toIndex > fromIndex) {
+            accounts[toIndex].setUnlock();
+            accounts[fromIndex].setUnlock();
+        } else {
+            accounts[fromIndex].setUnlock();
+            accounts[toIndex].setUnlock();
+        }
     }
 
     /**
@@ -142,12 +152,11 @@ public class BankImpl implements Bank {
             lock.lock();
         }
 
+
         public void setUnlock() {
             lock.unlock();
         }
 
-        public boolean tryLock() {
-            return lock.tryLock();
-        }
+
     }
 }
