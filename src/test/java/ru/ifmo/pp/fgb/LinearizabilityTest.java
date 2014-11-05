@@ -32,10 +32,13 @@ public class LinearizabilityTest extends TestCase {
     private Bank bank;
 
     public void testLinearizability() {
+        long start = System.currentTimeMillis();
         for (int threadNo = 0; threadNo < THREADS; threadNo++)
             new TestThread(threadNo).start();
         for (int runNo = 1; runNo <= RUNS; runNo++)
             doOneRun(runNo);
+        long finish = System.currentTimeMillis();
+        System.out.println("TIME!!!!!!!! = " + (finish - start));
     }
 
     private void doOneRun(int runNo) {
@@ -180,12 +183,18 @@ public class LinearizabilityTest extends TestCase {
     private long nextRndAmountOrInvalid() {
         if (rnd.nextInt(100) == 0) { // 1% of invalid amounts
             switch (rnd.nextInt(6)) {
-                case 0: return 0;
-                case 1: return -1;
-                case 2: return Long.MIN_VALUE;
-                case 3: return Bank.MAX_AMOUNT + 1;
-                case 4: return Bank.MAX_AMOUNT + 2;
-                case 5: return Long.MAX_VALUE;
+                case 0:
+                    return 0;
+                case 1:
+                    return -1;
+                case 2:
+                    return Long.MIN_VALUE;
+                case 3:
+                    return Bank.MAX_AMOUNT + 1;
+                case 4:
+                    return Bank.MAX_AMOUNT + 2;
+                case 5:
+                    return Long.MAX_VALUE;
             }
         }
         return nextRndAmount();
@@ -193,7 +202,7 @@ public class LinearizabilityTest extends TestCase {
 
     private long nextRndAmount() {
         int base = 1_000_000_000;
-        return 1 + rnd.nextInt(base) + rnd.nextInt((int)(Bank.MAX_AMOUNT / base)) * (long)base;
+        return 1 + rnd.nextInt(base) + rnd.nextInt((int) (Bank.MAX_AMOUNT / base)) * (long) base;
     }
 
     private class TestThread extends Thread {

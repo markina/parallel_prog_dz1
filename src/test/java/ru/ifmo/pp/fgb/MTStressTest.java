@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Multi-threaded stress test for bank implementation -- many threads and operations of various accounts.
- *
+ * <p/>
  * <p>This test test correctness of concurrent deposit, withdraw, transfer, and getTotalAmount operations.
  * It does not check getAmount operations concurrently with the above.
  *
@@ -30,6 +30,7 @@ public class MTStressTest extends TestCase {
     private volatile boolean failed;
 
     public void testStress() throws InterruptedException {
+        long start = System.currentTimeMillis();
         assertEquals(N, bank.getNumberOfAccounts());
         for (int i = 0; i < N; i++)
             bank.deposit(i, MEAN);
@@ -48,6 +49,8 @@ public class MTStressTest extends TestCase {
         for (int threadNo = 0; threadNo < THREADS; threadNo++)
             assertFalse(failed);
         System.out.println("Total average " + (totalOps.get() / PHASES) + " ops per phase");
+        long finish = System.currentTimeMillis();
+        System.out.println("TIME_MTStressTest = " + (finish - start));
     }
 
     private class TestThread extends Thread {

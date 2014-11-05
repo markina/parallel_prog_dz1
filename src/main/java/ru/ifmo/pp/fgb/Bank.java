@@ -37,24 +37,24 @@ public interface Bank {
     /**
      * Deposits specified amount to account.
      *
-     * @param index account index from 0 to {@link #getNumberOfAccounts() n}-1.
+     * @param index  account index from 0 to {@link #getNumberOfAccounts() n}-1.
      * @param amount positive amount to deposit.
      * @return resulting amount in account.
-     * @throws IllegalArgumentException when amount <= 0.
+     * @throws IllegalArgumentException  when amount <= 0.
      * @throws IndexOutOfBoundsException when index is invalid account index.
-     * @throws IllegalStateException when deposit will overflow account above {@link #MAX_AMOUNT}.
+     * @throws IllegalStateException     when deposit will overflow account above {@link #MAX_AMOUNT}.
      */
     public long deposit(int index, long amount);
 
     /**
      * Withdraws specified amount from account.
      *
-     * @param index account index from 0 to {@link #getNumberOfAccounts() n}-1.
+     * @param index  account index from 0 to {@link #getNumberOfAccounts() n}-1.
      * @param amount positive amount to withdraw.
      * @return resulting amount in account.
-     * @throws IllegalArgumentException when amount <= 0.
+     * @throws IllegalArgumentException  when amount <= 0.
      * @throws IndexOutOfBoundsException when index is invalid account index.
-     * @throws IllegalStateException when account does not enough to withdraw.
+     * @throws IllegalStateException     when account does not enough to withdraw.
      */
     public long withdraw(int index, long amount);
 
@@ -62,11 +62,11 @@ public interface Bank {
      * Transfers specified amount from one account to another account.
      *
      * @param fromIndex account index to withdraw from.
-     * @param toIndex account index to deposit to.
-     * @param amount positive amount to transfer.
-     * @throws IllegalArgumentException when amount <= 0 or fromIndex == toIndex.
+     * @param toIndex   account index to deposit to.
+     * @param amount    positive amount to transfer.
+     * @throws IllegalArgumentException  when amount <= 0 or fromIndex == toIndex.
      * @throws IndexOutOfBoundsException when account indices are invalid.
-     * @throws IllegalStateException when there is not enough funds in source account or too much in target one.
+     * @throws IllegalStateException     when there is not enough funds in source account or too much in target one.
      */
     public void transfer(int fromIndex, int toIndex, long amount);
 }

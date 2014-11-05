@@ -14,6 +14,7 @@ class SequentialBank implements Bank {
 
     /**
      * Creates new bank instance.
+     *
      * @param n the number of accounts (numbered from 0 to n-1).
      */
     public SequentialBank(int n) {

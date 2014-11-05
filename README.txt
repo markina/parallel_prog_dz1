@@ -88,3 +88,19 @@
 у каждого метода класса BankImpl написать ключевое слово "synchronized" (проверьте!). Но такая реализации,
 несмотря на прохождение тестов, не удовлетворяет заданию, которое требудет применение тонкой, а не грубой,
 блокировки.
+
+
+........
+log :
+testLinearizability:
+TIME_Lineatizability = 109207
+testFunctionalTest:
+TIME_EmptyBank = 0
+TIME_Transfer = 0
+TIME_Deposit = 0
+TIME_Withdraw = 0
+TIME_TotalAmount = 0
+MTSStressTest:
+Total average 10639417 ops per phase
+TIME_MTStressTest = 10120
+
